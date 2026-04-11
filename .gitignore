@@ -1,4 +1,4 @@
-pkg/
+
 *.db
 *.exe
 .vscode/
