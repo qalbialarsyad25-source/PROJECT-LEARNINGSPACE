@@ -33,3 +33,21 @@ func ToInformationResponse(information entity.Information) InformationResponse {
 		Content: information.Content,
 	}
 }
+
+func (p *EditInformation) ToMap() map[string]any {
+	Update := map[string]any{}
+
+	if p.Name != ""{
+		Update["name"] = p.Name
+	}
+
+	if p.Title != ""{
+		Update["title"] = p.Title
+	}
+
+	if p.Content != ""{
+		Update["content"] = p.Content
+	}
+
+	return Update
+}
