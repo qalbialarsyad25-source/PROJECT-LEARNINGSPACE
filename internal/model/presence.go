@@ -2,6 +2,7 @@ package model
 
 import (
 	"learningSpace/internal/entity"
+	"time"
 
 	"github.com/google/uuid"
 )
@@ -17,10 +18,11 @@ type ConfrimPresence struct {
 }
 
 type PresenceResponse struct {
-	Id       uuid.UUID `json:"id"`
-	Presence bool      `json:"presence"`
-	Content  string    `json:"content"`
-	Title    string    `json:"title"`
+	Id        uuid.UUID `json:"id"`
+	Presence  bool      `json:"presence"`
+	Content   string    `json:"content"`
+	Title     string    `json:"title"`
+	CreatedAt time.Time `json:"Created_At"`
 }
 
 type EditPresence struct {
