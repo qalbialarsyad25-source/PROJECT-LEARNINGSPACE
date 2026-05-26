@@ -13,7 +13,7 @@ type IInformationRepository interface{
 	CreateInformation(ctx context.Context, information entity.Information) error
 	GetInformation(ctx context.Context, pagination model.Pagination) ([]entity.Information, error)
 	DeleteInformation(ctx context.Context, id uuid.UUID) error
-	EditeInformation(ctx context.Context, id uuid.UUID, edit model.EditInformation) error
+	EditInformation(ctx context.Context, id uuid.UUID, edit model.EditInformation) error
 }
 
 type InformationRepository struct{
