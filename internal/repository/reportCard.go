@@ -24,8 +24,8 @@ func NewReportCardRepository(db *gorm.DB) *ReportCardRepository {
 	return &ReportCardRepository{db}
 }
 
-func (p *ReportCardRepository) CreateReportCard(ctx context.Context, ReportCard entity.ReportCard) error {
-	err := gorm.G[entity.ReportCard](p.db).Create(ctx, &ReportCard)
+func (p *ReportCardRepository) CreateReportCard(ctx context.Context, report entity.ReportCard) error {
+	err := gorm.G[entity.ReportCard](p.db).Create(ctx, &report)
 	if err != nil {
 		return err
 	}
