@@ -40,6 +40,15 @@ func ToPresenceResponse(presence entity.Presence) PresenceResponse {
 	}
 }
 
+func ToPresenceResponses(presence []entity.Presence) []PresenceResponse{
+	var response []PresenceResponse
+	for _, presence := range presence {
+		response = append(response, ToPresenceResponse(presence))
+	}
+
+	return response
+}
+
 func (p *EditPresence) ToMap() map[string]any {
 	Update := map[string]any{}
 
