@@ -11,6 +11,7 @@ import (
 
 type IPresenceRepository interface {
 	CreatePresence(ctx context.Context, presence entity.Presence) error
+	ConfirmPresence(ctx context.Context, userId uuid.UUID, presence entity.Presence) error
 	GetPresence(ctx context.Context, pagination model.Pagination) ([]entity.Presence, error)
 	DeletePresence(ctx context.Context, id uuid.UUID) error
 	EditPresence(ctx context.Context, id uuid.UUID, edit model.EditPresence) error
@@ -25,6 +26,15 @@ func NewPresenceRepository(db *gorm.DB) *PresenceRepository {
 }
 
 func (p *PresenceRepository) CreatePresence(ctx context.Context, presence entity.Presence) error {
+	err := gorm.G[entity.Presence](p.db).Create(ctx, &presence)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (p *PresenceRepository) ConfirmPresence(ctx context.Context, userId uuid.UUID, presence entity.Presence) error{
 	err := gorm.G[entity.Presence](p.db).Create(ctx, &presence)
 	if err != nil {
 		return err
