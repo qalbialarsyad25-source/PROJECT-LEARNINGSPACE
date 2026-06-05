@@ -13,7 +13,7 @@ type CreatePresence struct {
 	Title    string `json:"title" validate:"required"`
 }
 
-type ConfrimPresence struct {
+type ConfirmPresence struct {
 	Presence bool `json:"presence"`
 }
 
