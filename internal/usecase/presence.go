@@ -11,7 +11,8 @@ import (
 )
 
 type IPresenceUsecase interface {
-	CreatePresence(ctx context.Context, Presence model.CreatePresence) (*model.PresenceResponse, error)
+	CreatePresence(ctx context.Context, CreatePresence model.CreatePresence) (*model.PresenceResponse, error)
+	ConfirmPresence(ctx context.Context, userId uuid.UUID, ConfirmPresence model.ConfirmPresence) (*model.PresenceResponse, error)
 	GetPresence(ctx context.Context, pagination model.Pagination) ([]model.PresenceResponse, error)
 	DeletePresence(ctx context.Context, id uuid.UUID) error
 	EditPresence(ctx context.Context, id uuid.UUID, edit model.EditPresence) error
@@ -28,7 +29,7 @@ func NewPresenceUsecase(PresenceRepository repository.IPresenceRepository) *Pres
 func (p *PresenceUsecase) CreatePresence(ctx context.Context, CreatePresence model.CreatePresence) (*model.PresenceResponse, error) {
 	Presence := entity.Presence{
 		Id:        uuid.New(),
-		Presence:  CreatePresence.Presence,
+		Presence:  false,
 		Title:     CreatePresence.Title,
 		Content:   CreatePresence.Content,
 		CreatedAt: time.Now(),
@@ -36,6 +37,20 @@ func (p *PresenceUsecase) CreatePresence(ctx context.Context, CreatePresence mod
 
 	err := p.PresenceRepository.CreatePresence(ctx, Presence)
 	if err != nil {
+		return nil, err
+	}
+
+	response := model.ToPresenceResponse(Presence)
+	return &response, nil
+}
+
+func (p *PresenceUsecase) ConfirmPresence(ctx context.Context, userId uuid.UUID, ConfirmPresence model.ConfirmPresence) (*model.PresenceResponse, error){
+	Presence := entity.Presence{
+		Presence: ConfirmPresence.Presence,
+	}
+
+	err := p.PresenceRepository.ConfirmPresence(ctx, userId, Presence)
+	if err != nil{
 		return nil, err
 	}
 
