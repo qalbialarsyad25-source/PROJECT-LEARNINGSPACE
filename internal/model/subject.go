@@ -26,6 +26,15 @@ func ToSubjectResponse(subject entity.Subject) SubjectResponse {
 	}
 }
 
+func ToSubjectResponses(subject []entity.Subject) []SubjectResponse {
+	var responses []SubjectResponse
+	for _, subject := range subject{
+		responses = append(responses, ToSubjectResponse(subject))
+	}
+
+	return responses
+}
+
 func (p *EditSubject) ToMap() map[string]any {
 	Update := map[string]any{}
 
