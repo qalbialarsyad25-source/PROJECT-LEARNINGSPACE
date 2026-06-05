@@ -34,18 +34,27 @@ func ToInformationResponse(information entity.Information) InformationResponse {
 	}
 }
 
+func ToInformationResponses(information []entity.Information) []InformationResponse {
+	var responses []InformationResponse
+	for _, information := range information {
+		responses = append(responses, ToInformationResponse(information))
+	}
+
+	return responses
+}
+
 func (p *EditInformation) ToMap() map[string]any {
 	Update := map[string]any{}
 
-	if p.Name != ""{
+	if p.Name != "" {
 		Update["name"] = p.Name
 	}
 
-	if p.Title != ""{
+	if p.Title != "" {
 		Update["title"] = p.Title
 	}
 
-	if p.Content != ""{
+	if p.Content != "" {
 		Update["content"] = p.Content
 	}
 
