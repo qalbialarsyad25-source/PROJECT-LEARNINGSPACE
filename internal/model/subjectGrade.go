@@ -26,6 +26,15 @@ func ToSubjectGradeResponse(subjectGrade entity.SubjectGrade) SubjectGradeRespon
 	}
 }
 
+func ToSubjectGradeResponses(subjectGrade []entity.SubjectGrade)  []SubjectGradeResponse{
+	var responses []SubjectGradeResponse
+	for _, subjectGrade := range subjectGrade{
+		responses = append(responses, ToSubjectGradeResponse(subjectGrade))
+	}
+
+	return responses
+}
+
 func (p *EditSubjectGrade) ToMap() map[string]any {
 	Update := map[string]any{}
 
