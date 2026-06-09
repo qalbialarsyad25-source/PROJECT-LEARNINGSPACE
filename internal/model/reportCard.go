@@ -26,6 +26,15 @@ func ToReportCardResponse(reportCard entity.ReportCard) ReportCardResponse {
 	}
 }
 
+func ToReportCardResponses(reportCard []entity.ReportCard) []ReportCardResponse{
+	var response []ReportCardResponse
+	for _, reportCard := range reportCard {
+		response = append(response, ToReportCardResponse(reportCard))
+	}
+
+	return response
+}
+
 func (p *EditReportCard) ToMap() map[string]any {
 	Update := map[string]any{}
 
