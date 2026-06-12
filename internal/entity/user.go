@@ -3,7 +3,7 @@ package entity
 import "github.com/google/uuid"
 
 type User struct {
-	Id         uuid.UUID    `gorm:"type:char(36);primaryKey"`
+	Id         uuid.UUID    `gorm:"type:char(26);primaryKey"`
 	Name       string       `gorm:"type:varchar(100); not null"`
 	Email      string       `gorm:"type:varchar(255); not null"`
 	Password   string       `gorm:"type:varchar(100); not null"`
